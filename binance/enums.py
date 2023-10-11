@@ -1,81 +1,101 @@
-from enum import Enum
+from enum import Enum, auto
 
-SYMBOL_TYPE_SPOT = 'SPOT'
+# Type of symbols for trading.
+class SymbolType(Enum):
+    SPOT = 'SPOT'
 
-ORDER_STATUS_NEW = 'NEW'
-ORDER_STATUS_PARTIALLY_FILLED = 'PARTIALLY_FILLED'
-ORDER_STATUS_FILLED = 'FILLED'
-ORDER_STATUS_CANCELED = 'CANCELED'
-ORDER_STATUS_PENDING_CANCEL = 'PENDING_CANCEL'
-ORDER_STATUS_REJECTED = 'REJECTED'
-ORDER_STATUS_EXPIRED = 'EXPIRED'
+# Status of a trading order.
+class OrderStatus(Enum):
+    NEW = 'NEW'
+    PARTIALLY_FILLED = 'PARTIALLY_FILLED'
+    FILLED = 'FILLED'
+    CANCELED = 'CANCELED'
+    PENDING_CANCEL = 'PENDING_CANCEL'
+    REJECTED = 'REJECTED'
+    EXPIRED = 'EXPIRED'
 
-KLINE_INTERVAL_1SECOND = '1s'
-KLINE_INTERVAL_1MINUTE = '1m'
-KLINE_INTERVAL_3MINUTE = '3m'
-KLINE_INTERVAL_5MINUTE = '5m'
-KLINE_INTERVAL_15MINUTE = '15m'
-KLINE_INTERVAL_30MINUTE = '30m'
-KLINE_INTERVAL_1HOUR = '1h'
-KLINE_INTERVAL_2HOUR = '2h'
-KLINE_INTERVAL_4HOUR = '4h'
-KLINE_INTERVAL_6HOUR = '6h'
-KLINE_INTERVAL_8HOUR = '8h'
-KLINE_INTERVAL_12HOUR = '12h'
-KLINE_INTERVAL_1DAY = '1d'
-KLINE_INTERVAL_3DAY = '3d'
-KLINE_INTERVAL_1WEEK = '1w'
-KLINE_INTERVAL_1MONTH = '1M'
+# Intervals for candlestick data.
+class KlineInterval(Enum):
+    SECOND = '1s'
+    MINUTE = '1m'
+    THREE_MINUTE = '3m'
+    FIVE_MINUTE = '5m'
+    FIFTEEN_MINUTE = '15m'
+    THIRTY_MINUTE = '30m'
+    HOUR = '1h'
+    TWO_HOUR = '2h'
+    FOUR_HOUR = '4h'
+    SIX_HOUR = '6h'
+    EIGHT_HOUR = '8h'
+    TWELVE_HOUR = '12h'
+    DAY = '1d'
+    THREE_DAY = '3d'
+    WEEK = '1w'
+    MONTH = '1M'
 
-SIDE_BUY = 'BUY'
-SIDE_SELL = 'SELL'
+# Possible sides for an order.
+class OrderSide(Enum):
+    BUY = 'BUY'
+    SELL = 'SELL'
 
-ORDER_TYPE_LIMIT = 'LIMIT'
-ORDER_TYPE_MARKET = 'MARKET'
-ORDER_TYPE_STOP_LOSS = 'STOP_LOSS'
-ORDER_TYPE_STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT'
-ORDER_TYPE_TAKE_PROFIT = 'TAKE_PROFIT'
-ORDER_TYPE_TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT'
-ORDER_TYPE_LIMIT_MAKER = 'LIMIT_MAKER'
+# Types of orders in traditional trading.
+class OrderType(Enum):
+    LIMIT = 'LIMIT'
+    MARKET = 'MARKET'
+    STOP_LOSS = 'STOP_LOSS'
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT'
+    TAKE_PROFIT = 'TAKE_PROFIT'
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT'
+    LIMIT_MAKER = 'LIMIT_MAKER'
 
-FUTURE_ORDER_TYPE_LIMIT = 'LIMIT'
-FUTURE_ORDER_TYPE_MARKET = 'MARKET'
-FUTURE_ORDER_TYPE_STOP = 'STOP'
-FUTURE_ORDER_TYPE_STOP_MARKET = 'STOP_MARKET'
-FUTURE_ORDER_TYPE_TAKE_PROFIT = 'TAKE_PROFIT'
-FUTURE_ORDER_TYPE_TAKE_PROFIT_MARKET = 'TAKE_PROFIT_MARKET'
-FUTURE_ORDER_TYPE_LIMIT_MAKER = 'LIMIT_MAKER'
-FUTURE_ORDER_TYPE_TRAILING_STOP_MARKET = 'TRAILING_STOP_MARKET'
+# Types of orders in futures trading.
+class FutureOrderType(Enum):
+    LIMIT = 'LIMIT'
+    MARKET = 'MARKET'
+    STOP = 'STOP'
+    STOP_MARKET = 'STOP_MARKET'
+    TAKE_PROFIT = 'TAKE_PROFIT'
+    TAKE_PROFIT_MARKET = 'TAKE_PROFIT_MARKET'
+    LIMIT_MAKER = 'LIMIT_MAKER'
+    TRAILING_STOP_MARKET = 'TRAILING_STOP_MARKET'
 
-TIME_IN_FORCE_GTC = 'GTC'  # Good till cancelled
-TIME_IN_FORCE_IOC = 'IOC'  # Immediate or cancel
-TIME_IN_FORCE_FOK = 'FOK'  # Fill or kill
-TIME_IN_FORCE_GTX = 'GTX'  # Post only order
+# Valid time constraints for an order.
+class TimeInForce(Enum):
+    GTC = 'GTC'  # Good till cancelled
+    IOC = 'IOC'  # Immediate or cancel
+    FOK = 'FOK'  # Fill or kill
+    GTX = 'GTX'  # Post only order
 
-ORDER_RESP_TYPE_ACK = 'ACK'
-ORDER_RESP_TYPE_RESULT = 'RESULT'
-ORDER_RESP_TYPE_FULL = 'FULL'
+# Type of response to expect from an order request.
+class OrderRespType(Enum):
+    ACK = 'ACK'
+    RESULT = 'RESULT'
+    FULL = 'FULL'
 
-WEBSOCKET_DEPTH_5 = '5'
-WEBSOCKET_DEPTH_10 = '10'
-WEBSOCKET_DEPTH_20 = '20'
+# Valid depth values for Websockets.
+class WebsocketDepth(Enum):
+    DEPTH_5 = '5'
+    DEPTH_10 = '10'
+    DEPTH_20 = '20'
 
-NO_SIDE_EFFECT_TYPE = 'NO_SIDE_EFFECT'
-MARGIN_BUY_TYPE = 'MARGIN_BUY'
-AUTO_REPAY_TYPE = 'AUTO_REPAY'
+# Types of side effects an order can have.
+class SideEffectType(Enum):
+    NO_SIDE_EFFECT = 'NO_SIDE_EFFECT'
+    MARGIN_BUY = 'MARGIN_BUY'
+    AUTO_REPAY = 'AUTO_REPAY'
 
-
+# Types of historical kline data.
 class HistoricalKlinesType(Enum):
-    SPOT = 1
-    FUTURES = 2
-    FUTURES_COIN = 3
+    SPOT = auto()
+    FUTURES = auto()
+    FUTURES_COIN = auto()
 
-
+# Types of futures trading.
 class FuturesType(Enum):
-    USD_M = 1
-    COIN_M = 2
+    USD_M = auto()
+    COIN_M = auto()
 
-
+# Types of contracts in futures trading.
 class ContractType(Enum):
     PERPETUAL = "perpetual"
     CURRENT_QUARTER = "current_quarter"
