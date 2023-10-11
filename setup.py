@@ -1,35 +1,32 @@
 #!/usr/bin/env python
 from setuptools import setup
-import codecs
 import os
 import re
 
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
-with codecs.open(
-        os.path.join(
-            os.path.abspath(os.path.dirname(__file__)),
-            'binance',
-            '__init__.py'
-        ), 'r', 'latin1') as fp:
-    try:
-        version = re.findall(r'^__version__ = "([^"]+)"\r?$', fp.read(), re.M)[0]
-    except IndexError:
-        raise RuntimeError('Unable to determine version.')
+def read_file(file_name):
+    with open(file_name, 'r', encoding='utf-8') as f:
+        return f.read()
 
-with open("README.rst", "r") as fh:
-    long_description = fh.read()
+def extract_version():
+    init_file_content = read_file(os.path.join(BASE_DIR, 'binance', '__init__.py'))
+    version_match = re.search(r'^__version__ = ["\']([^"\']+)', init_file_content, re.M)
+    if not version_match:
+        raise ValueError("Unable to find the version number.")
+    return version_match.group(1)
 
 setup(
     name='python-binance',
-    version=version,
+    version=extract_version(),
     packages=['binance'],
     description='Binance REST API python implementation',
-    long_description=long_description,
+    long_description=read_file("README.rst"),
     long_description_content_type="text/x-rst",
     url='https://github.com/sammchardy/python-binance',
     author='Sam McHardy',
     license='MIT',
-    author_email='',
+    author_email='[email protected]',
     install_requires=[
         'requests', 'six', 'dateparser', 'aiohttp', 'ujson', 'websockets', 'pycryptodome'
     ],
